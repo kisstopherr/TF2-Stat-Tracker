@@ -332,8 +332,9 @@ if __name__ == "__main__":
     cache_elapsed_time = end_cache_time - start_cache_time
     print(f"{Fore.YELLOW}-Built cache in {cache_elapsed_time:6f} seconds.")
 
-#   Clear & reset the temp file from the last session
-    clear_temp() 
+#   Clear & reset the temp file from the last session; Also make sure the export folder exists
+    clear_temp()
+    os.makedirs(EXPORT_FOLDER_PATH, exist_ok=True) 
     print(f"{Fore.YELLOW}-TF2 Stat Tracker listening.")
 
     try:
