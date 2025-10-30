@@ -105,12 +105,15 @@ def export_json():
         "Players": merged_players
     }
 
+
     export_json_path = f"{EXPORT_FOLDER_PATH}\{end_time}.json"
-    with open(export_json_path, 'w', encoding="utf-8") as f:
-        json.dump(export_data, f, indent=4, ensure_ascii=False)
+    try:
+        with open(export_json_path, 'w', encoding="utf-8") as f:
+            json.dump(export_data, f, indent=4, ensure_ascii=False)
 
-    print(f"{Fore.YELLOW}-Exported data to '{export_json_path}'.")
-
+        print(f"{Fore.YELLOW}-Exported data to '{export_json_path}'.")
+    except FileNotFoundError:
+        print(f"{Fore.YELLOW}-Failed to export data to '{EXPORT_FOLDER_PATH}'.")
 
 def build_cache():
     """
