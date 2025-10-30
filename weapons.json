@@ -1,0 +1,41 @@
+{
+    "scout": [
+      "scattergun", "pistol_scout", "bat", "force_a_nature", "ball", "wrap_assassin", "sandman", "pep_brawlerblaster",
+      "the_winger", "soda_popper", "back_scatter", "pep_pistol", "candy_cane", "shortstop", "player", "bleed_kill",
+      "guillotine", "lava_bat", "warfan", "atomizer", "holymackerel", "fryingpan", "ham_shank", "boston_basher"
+    ],
+    "soldier": [
+      "tf_projectile_rocket", "shotgun_soldier", "shovel", "cow_mangler", "reserve_shooter", "unique_pickaxe",
+      "nonnonviolent_protest", "panic_attack", "airstrike", "righteous_bison", "dumpster_device", "fryingpan",
+      "quake_rl", "ham_shank", "rocketlauncher_directhit", "demokatana", "unique_pickaxe_escape", "blackbox",
+      "disciplinary_action", "liberty_launcher", "paintrain"
+    ],
+    "pyro": [
+      "flamethrower", "shotgun_pyro", "fireaxe", "powerjack", "degreaser", "detonator", "reserve_shooter",
+      "lollichop", "backburner", "panic_attack", "dragons_fury_bonus", "annihilator", "fryingpan", "scorch_shot",
+      "rainblower", "manmelter", "mailbox", "hot_hand", "flaregun", "nonnonviolent_protest", "sledgehammer",
+      "thirddegree", "axtinguisher", "back_scratcher", "deflect_rocket"
+    ],
+    "demo": [
+      "tf_projectile_pipe_remote", "tf_projectile_pipe", "bottle", "iron_bomber", "nonnonviolent_protest",
+      "loose_cannon", "quickiebomb_launcher", "loch_n_load", "nessieclub", "demoshield", "demokatana",
+      "tide_turner", "splendid_screen", "persian_persuader"
+    ],
+    "heavy": [
+      "minigun", "shotgun_hwg", "fists"
+    ],
+    "engineer": [
+      "shotgun_primary", "pistol", "wrench", "obj_sentrygun3", "obj_sentrygun2", "obj_sentrygun1"
+    ],
+    "medic": [
+      "syringegun_medic", "bonesaw"
+    ],
+    "sniper": [
+      "sniperrifle", "smg", "club", "the_classic"
+    ],
+    "spy": [
+      "revolver", "knife"
+    ]
+  }
+
+  
