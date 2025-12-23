@@ -6,13 +6,13 @@
     ],
     "soldier": [
       "tf_projectile_rocket", "shotgun_soldier", "shovel", "cow_mangler", "reserve_shooter", "unique_pickaxe",
-      "nonnonviolent_protest", "panic_attack", "airstrike", "righteous_bison", "dumpster_device", "fryingpan",
+      "nonnonviolent_protest", "airstrike", "righteous_bison", "dumpster_device", "fryingpan",
       "quake_rl", "ham_shank", "rocketlauncher_directhit", "demokatana", "unique_pickaxe_escape", "blackbox",
       "disciplinary_action", "liberty_launcher", "paintrain"
     ],
     "pyro": [
       "flamethrower", "shotgun_pyro", "fireaxe", "powerjack", "degreaser", "detonator", "reserve_shooter",
-      "lollichop", "backburner", "panic_attack", "dragons_fury_bonus", "annihilator", "fryingpan", "scorch_shot",
+      "lollichop", "backburner", "dragons_fury_bonus", "annihilator", "fryingpan", "scorch_shot",
       "rainblower", "manmelter", "mailbox", "hot_hand", "flaregun", "nonnonviolent_protest", "sledgehammer",
       "thirddegree", "axtinguisher", "back_scratcher", "deflect_rocket"
     ],
@@ -22,20 +22,22 @@
       "tide_turner", "splendid_screen", "persian_persuader"
     ],
     "heavy": [
-      "minigun", "shotgun_hwg", "fists"
+      "minigun", "shotgun_hwg", "fists", "gloves_running_urgently", "long_heatmaker", "family_business",
+      "holiday_punch", "brass_beast", "warrior_spirit", "natascha", "gloves", "tomislav", "steel_fists", "eviction_notice"
     ],
     "engineer": [
-      "shotgun_primary", "pistol", "wrench", "obj_sentrygun3", "obj_sentrygun2", "obj_sentrygun1"
+      "shotgun_primary", "pistol", "wrench", "obj_sentrygun3", "obj_sentrygun2", "obj_sentrygun1",
+      "frontier_justice", "obj_minisentry", "short_circuit", "tf_projectile_mechanicalarmorb", "widowmaker", "wrangler_kill",
+      "rescue_ranger", "southern_hospitality", "pomson", "wrench_jag", "eureka_effect", "robot_arm"
     ],
     "medic": [
-      "syringegun_medic", "bonesaw"
+      "syringegun_medic", "bonesaw", "crusaders_crossbow", "ubersaw", "solemn_vow", "blutsauger", "proto_syringe", "amputator"
     ],
     "sniper": [
-      "sniperrifle", "smg", "club", "the_classic"
+      "sniperrifle", "smg", "club", "the_classic", "tf_projectile_arrow", "bushwacka", "taunt_sniper", 
+      "pro_smg", "pro_rifle", "shahanshah", "bazaar_bargain", "machina", "tribalkukri", "sydney_sleeper"
     ],
     "spy": [
-      "revolver", "knife"
+      "revolver", "knife", "spy_cicle", "diamondback", "big_earner", "letranger", "kunai", "enforcer", "ambassador", "eternal_reward"
     ]
   }
-
-  
