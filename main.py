@@ -150,8 +150,8 @@ def handle_cycle(line_number: int):
             line_number += 1
             line_text = line.strip()
 
-#           Stop reading when __Done__ is printed
-            if line_text == "__DONE__":
+#           Stop reading when Status_Cycle_Done is printed
+            if line_text == "Status_Cycle_Done":
                 break
 
 #           Hostname line
@@ -342,7 +342,7 @@ if __name__ == "__main__":
             if line == "export_stats":
                 export_json()
             # TF2 Console is just weird and prints it on 2 lines or backwards or NORMAL idk :(
-            elif "[Status Cycle] Running" in line or "Status Running" in line or "[Status Cycle]" in line:
+            elif "Status_Cycle_Running" in line:
                 handle_cycle(line_number)
 
             result = checkPlayerWeapon(line)
