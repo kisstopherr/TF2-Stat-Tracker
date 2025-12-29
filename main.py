@@ -14,7 +14,7 @@ EXPORT_FOLDER_PATH = f"{CURRENT_FILE_PATH}\export"
 START_TIME = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 START_TIME_SECONDS = time.perf_counter()
 
-
+USERNAME = "kisstopherr"
 WEAPON_CACHE = {}
 players = [] # list[player]
 cycles = 0
@@ -30,7 +30,6 @@ class Player:
         self.crit_amount = crit_amount
         self.kills = kills
         self.deaths = deaths
-
 
         self.steam_id = ""
         self.play_time = ""
@@ -64,10 +63,28 @@ class Player:
         self.deaths += 1
 
 
+def reset():
+    """
+    Resets all values and temp file
+    """
+    global players, cycles, hostname, map_name, START_TIME, START_TIME_SECONDS
+    players = [] # list[player]
+    cycles = 0
+    hostname = ""
+    map_name = ""
+    
+    START_TIME = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+    START_TIME_SECONDS = time.perf_counter()
+    clear_temp()
+
 def export_json():
     """
     Takes all current data and from the temp file, and dumps it to an export.json file.
     """
+
+    if len(players) == 0:
+        return
+
     end_time = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
     end_time_seconds = time.perf_counter()
     elapsed_time = end_time_seconds - START_TIME_SECONDS
@@ -136,11 +153,7 @@ def handle_cycle(line_number: int):
     Handles the logic when the status command is ran in the console.
     """
     global cycles, map_name, hostname, players
-
-    cycles += 1
     status_players = []
-    print(f"{Fore.YELLOW}-New Cycle ({cycles} total).")
-
     with open(CONSOLE_OUTPUT_PATH, "r", encoding="utf-8", errors="ignore") as f:
 #       Skip to the right line number
         for _ in range(line_number):
@@ -181,7 +194,9 @@ def handle_cycle(line_number: int):
                             break
 
     status_players = [p.lower().strip() for p in status_players]
-
+#   If your in the menu return so nothing gets added
+    if len(status_players) == 0:
+        return
 #   Handle disconnects
     for player in players[:]:
         if player.name.lower().strip() not in status_players:
@@ -189,6 +204,9 @@ def handle_cycle(line_number: int):
             players.remove(player)
             print(f"{Fore.YELLOW}-'{player.name}' has left at cycle: {cycles}.")
             add_temp_players(player)
+    
+    cycles += 1
+    print(f"{Fore.YELLOW}-New Cycle ({cycles} total).")
 
 
 def clear_temp():
@@ -199,7 +217,7 @@ def clear_temp():
     with open(TEMP_JSON_PATH, 'w', encoding="utf-8") as f:
         data = {"Players": {}}
         json.dump(data, f, indent=4)
-    print(f"{Fore.YELLOW}-Temp JSON file has been cleared & reset.")
+    #print(f"{Fore.YELLOW}-Temp JSON file has been cleared & reset.")
 
 
 
@@ -328,11 +346,7 @@ if __name__ == "__main__":
     
     start_cache_time = time.perf_counter()
     build_cache()
-    end_cache_time = time.perf_counter()
-    cache_elapsed_time = end_cache_time - start_cache_time
-    print(f"{Fore.YELLOW}-Built cache in {cache_elapsed_time:6f} seconds.")
-
-#   Clear & reset the temp file from the last session; Also make sure the export folder exists
+#   Clear & reset the temp file from the last session; also make sure the export folder exists
     clear_temp()
     os.makedirs(EXPORT_FOLDER_PATH, exist_ok=True) 
     print(f"{Fore.YELLOW}-TF2 Stat Tracker listening.")
@@ -341,9 +355,12 @@ if __name__ == "__main__":
         for line, line_number in follow_file(CONSOLE_OUTPUT_PATH):
             if line == "export_stats":
                 export_json()
-            # TF2 Console is just weird and prints it on 2 lines or backwards or NORMAL idk :(
             elif "Status_Cycle_Running" in line:
                 handle_cycle(line_number)
+            elif f"{USERNAME} connected" in line:
+                print(f"{Fore.YELLOW}-Joining a new lobby; reseting and exporting.")
+                export_json()
+                reset()
 
             result = checkPlayerWeapon(line)
             if result[1] is not None:
