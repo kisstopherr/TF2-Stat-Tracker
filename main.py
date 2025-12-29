@@ -14,7 +14,7 @@ EXPORT_FOLDER_PATH = f"{CURRENT_FILE_PATH}\export"
 START_TIME = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 START_TIME_SECONDS = time.perf_counter()
 
-USERNAME = "kisstopherr"
+USERNAME = "YOUR_STEAM_NAME" # PLEASE CHANGE TO YOUR STEAM NAME
 WEAPON_CACHE = {}
 players = [] # list[player]
 cycles = 0
