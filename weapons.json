@@ -14,12 +14,12 @@
       "flamethrower", "shotgun_pyro", "fireaxe", "powerjack", "degreaser", "detonator", "reserve_shooter",
       "lollichop", "backburner", "dragons_fury_bonus", "annihilator", "fryingpan", "scorch_shot",
       "rainblower", "manmelter", "mailbox", "hot_hand", "flaregun", "nonnonviolent_protest", "sledgehammer",
-      "thirddegree", "axtinguisher", "back_scratcher", "deflect_rocket"
+      "thirddegree", "axtinguisher", "back_scratcher", "deflect_rocket", "phlogistinator"
     ],
     "demo": [
       "tf_projectile_pipe_remote", "tf_projectile_pipe", "bottle", "iron_bomber", "nonnonviolent_protest",
       "loose_cannon", "quickiebomb_launcher", "loch_n_load", "nessieclub", "demoshield", "demokatana",
-      "tide_turner", "splendid_screen", "persian_persuader"
+      "tide_turner", "splendid_screen", "persian_persuader", "sword"
     ],
     "heavy": [
       "minigun", "shotgun_hwg", "fists", "gloves_running_urgently", "long_heatmaker", "family_business",
@@ -41,3 +41,5 @@
       "revolver", "knife", "spy_cicle", "diamondback", "big_earner", "letranger", "kunai", "enforcer", "ambassador", "eternal_reward"
     ]
   }
+
+  
