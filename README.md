@@ -46,12 +46,6 @@ cd TF2-Stat-Tracker
 pip install -r requirements.txt
 ```
 
-**OR**
-
-```bash
-pip install colorama
-```
-
 ### 3. Configure TF2 and required files
 
 * Make sure the `USERNAME` variable is set to your real steam username. 
