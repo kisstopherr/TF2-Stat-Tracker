@@ -3,6 +3,8 @@ import os
 import time
 import re
 from colorama import init, Fore
+import graphic
+import threading
 
 #   Config
 CURRENT_FILE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -14,7 +16,7 @@ EXPORT_FOLDER_PATH = f"{CURRENT_FILE_PATH}\export"
 START_TIME = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 START_TIME_SECONDS = time.perf_counter()
 
-USERNAME = "YOUR_STEAM_NAME" # PLEASE CHANGE TO YOUR STEAM NAME
+USERNAME = "YOUR TF2 USERNAME"
 WEAPON_CACHE = {}
 players = [] # list[player]
 cycles = 0
@@ -40,7 +42,8 @@ class Player:
         Updates the player's class if it has changed.
         """
         if self.current_class != new_class:
-            print(f"{Fore.BLUE}{self.name} has changed to a {new_class}")
+            #print(f"{Fore.BLUE}{self.name} has changed to a {new_class}")
+            graphic.output_text(f"{self.name} has changed to a {new_class}", "white")
             self.current_class = new_class
     
     def add_crit(self):
@@ -48,7 +51,8 @@ class Player:
         Increments the player's crit hit count by one and logs the update.
         """
         self.crit_amount += 1
-        print(f"{Fore.LIGHTRED_EX}{self.name} got a crit ({self.crit_amount} total)")
+        graphic.output_text(f"{self.name} got a crit ({self.crit_amount} total)", "red")
+        #print(f"{Fore.LIGHTRED_EX}{self.name} got a crit ({self.crit_amount} total)")
 
     def add_kill(self):
         """
@@ -128,9 +132,11 @@ def export_json():
         with open(export_json_path, 'w', encoding="utf-8") as f:
             json.dump(export_data, f, indent=4, ensure_ascii=False)
 
-        print(f"{Fore.YELLOW}-Exported data to '{export_json_path}'.")
+        #print(f"{Fore.YELLOW}-Exported data to '{export_json_path}'.")
+        graphic.output_text(f"-Exported data to '{export_json_path}'.", "orange")
     except FileNotFoundError:
-        print(f"{Fore.YELLOW}-Failed to export data to '{EXPORT_FOLDER_PATH}'.")
+        #print(f"{Fore.YELLOW}-Failed to export data to '{EXPORT_FOLDER_PATH}'.")
+        graphic.output_text(f"-Failed to export data to '{EXPORT_FOLDER_PATH}'.", "orange")
 
 def build_cache():
     """
@@ -202,11 +208,13 @@ def handle_cycle(line_number: int):
         if player.name.lower().strip() not in status_players:
             player.active = False
             players.remove(player)
-            print(f"{Fore.YELLOW}-'{player.name}' has left at cycle: {cycles}.")
+            #print(f"{Fore.YELLOW}-'{player.name}' has left at cycle: {cycles}.")
+            graphic.output_text(f"-'{player.name}' has left at cycle: {cycles}.", "orange")
             add_temp_players(player)
     
     cycles += 1
-    print(f"{Fore.YELLOW}-New Cycle ({cycles} total).")
+    #print(f"{Fore.YELLOW}-New Cycle ({cycles} total).")
+    graphic.output_text(f"-New Cycle ({cycles} total).", "orange")
 
 
 def clear_temp():
@@ -291,7 +299,8 @@ def get_player(name: str, current_class: str = '') -> Player:
     players.append(new_player)
 
     if current_class:
-        print(f"{Fore.BLUE}{name} is now a {current_class}")
+        graphic.output_text(f"{name} is now a {current_class}", "white")
+        #print(f"{Fore.BLUE}{name} is now a {current_class}")
         
     return new_player
 
@@ -314,10 +323,12 @@ def update_class(update_info: tuple[str, str, bool, str]):
 
 #   Always print kill message
     if victim_name:
-        #print(f"{killer_name} killed {victim_name}")
 #       Process victim
         victim = get_player(victim_name, "")
         victim.add_death()
+#   Update the graphic table with the new info
+    graphic.update_data(players)
+
 
 def follow_file(path: str):
     """
@@ -339,18 +350,14 @@ def follow_file(path: str):
             line_number += 1
             yield line.strip(), line_number 
 
-
-
-#   Main loop of the program
-if __name__ == "__main__":
-    
-    start_cache_time = time.perf_counter()
+def worker():
+    """Works"""
+    time.sleep(1)
     build_cache()
-#   Clear & reset the temp file from the last session; also make sure the export folder exists
     clear_temp()
-    os.makedirs(EXPORT_FOLDER_PATH, exist_ok=True) 
-    print(f"{Fore.YELLOW}-TF2 Stat Tracker listening.")
-
+    os.makedirs(EXPORT_FOLDER_PATH, exist_ok=True)
+    graphic.output_text("-TF2 Stat Tracker listening.", "orange")
+    #print(f"{Fore.YELLOW}-TF2 Stat Tracker listening.")
     try:
         for line, line_number in follow_file(CONSOLE_OUTPUT_PATH):
             if line == "export_stats":
@@ -358,13 +365,19 @@ if __name__ == "__main__":
             elif "Status_Cycle_Running" in line:
                 handle_cycle(line_number)
             elif f"{USERNAME} connected" in line:
-                print(f"{Fore.YELLOW}-Joining a new lobby; reseting and exporting.")
+                graphic.output_text("-Joining a new lobby; reseting and exporting.", "orange")
+                #print(f"{Fore.YELLOW}-Joining a new lobby; reseting and exporting.")
                 export_json()
                 reset()
 
             result = checkPlayerWeapon(line)
             if result[1] is not None:
                 update_class(result)
-            
+
     except Exception as e:
         print(f"ERROR: {e}")
+
+
+if __name__ == "__main__":
+    threading.Thread(target=worker, daemon=True).start()
+    graphic.run()
